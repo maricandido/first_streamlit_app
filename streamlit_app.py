@@ -2,7 +2,7 @@ import streamlit
 import pandas
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 import requests
-import snowflake.connector
+
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -28,6 +28,8 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # output as a table
 streamlit.dataframe(fruityvice_normalized)
+
+import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
